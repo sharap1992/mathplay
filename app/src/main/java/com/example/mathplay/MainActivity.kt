@@ -9,6 +9,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+
+
     private var firstNumber:Int = 0
     private var secondNumber:Int = 0
     private var tuwriJuwap:Int = 0
@@ -27,20 +29,23 @@ class MainActivity : AppCompatActivity() {
             tuwriJuwap++
             playGame()
         } else {
-            qateJuwap++
-            playGame()
-        }
-        if((qateJuwap + tuwriJuwap) == 10){
-            intent.putExtra("qateJuwap", qateJuwap)
             intent.putExtra("tuwriJuwap", tuwriJuwap)
             startActivity(intent)
+            finish()
         }
+
+        if(tuwriJuwap == 10){
+            val intent = Intent(this, GameWinActivity::class.java)
+            intent.putExtra("win", 0)
+            startActivity(intent)
+            finish()
+          }
     }
 
 
     private fun playGame() {
-        firstNumber = generateRandomNumber(10, 20)
-        secondNumber = generateRandomNumber(2, 20)
+        firstNumber = generateRandomNumber(2, 10)
+        secondNumber = generateRandomNumber(2, 5)
         operator = generateRandomOperator()
         number1.text = firstNumber.toString()
         number2.text = secondNumber.toString()
